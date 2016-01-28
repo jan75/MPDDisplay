@@ -7,24 +7,24 @@ import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import mpd.MPDOperations;
 import org.bff.javampd.MPD;
-
-import java.io.File;
 
 public class MPDFXMain extends Application {
 	//private final static Logger LOGGER = Logger.getLogger("charSheetLogger");
+	public static MPD mpd = MPDOperations.connectMPD();
 
 	@Override
 	public void start(Stage primaryStage) {
-		//initLoggers();
-		testMethod();
+
 		//
 		try{
 			Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
 			//
 			FXMLLoader loader= new FXMLLoader();
 			StackPane root = loader.load(this.getClass().getResource("/fx/javaFXLayout.fxml"));
-			Scene scene = new Scene(root, screenBounds.getWidth(), screenBounds.getHeight());
+			//Scene scene = new Scene(root, screenBounds.getWidth(), screenBounds.getHeight());
+			Scene scene = new Scene(root, 800, 800);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
@@ -32,6 +32,7 @@ public class MPDFXMain extends Application {
 			//primaryStage.setFullScreen(true);
 			//primaryStage.getIcons().add(new Image(MPDFXMain.class.getResourceAsStream("/fx/ApplicationIcon.png")));
 			primaryStage.show();
+			//
 		} catch(Exception e) {
 			//LOGGER.log(Level.SEVERE, "Exception " + e.getMessage(), e);
 			e.printStackTrace();
@@ -64,21 +65,4 @@ public class MPDFXMain extends Application {
 		}
 	}
 	*/
-
-	private void testMethod() {
-		try{
-			MPD mpd = new MPD.Builder().build();
-			//
-			//mpd.getPlaylist().clearPlaylist();
-			//
-			//System.out.println(mpd.getDatabase().findAlbum("21").size());
-			//System.out.println(mpd.getPlayer().getCurrentSong().getArtistName().toString());
-
-
-			//System.out.println(tmpFile.getParent());
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 }

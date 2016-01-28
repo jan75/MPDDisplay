@@ -1,12 +1,46 @@
 package fx;
 
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import mpd.MPDOperations;
+
+import java.net.URL;
 
 /**
  * Created by Jan on 02.01.2016.
  */
 public class FXMLController{
     //private final static Logger LOGGER = Logger.getLogger("charSheetLogger");
+    @FXML private ImageView imgCover;
+
+    @FXML
+    private void exitApplication() {
+        System.exit(0);
+    }
+
+    @FXML
+    private void loadImage() {
+        String pathToCover = MPDOperations.getCoverPath();
+        //pathToCover = '"' + pathToCover + '"';
+        System.out.println(pathToCover);
+
+        Image tmpImage;
+        //
+        if(pathToCover != null) {
+            try{
+                tmpImage = new Image(String.valueOf(new URL("file:" + pathToCover)));
+                //tmpImage = new Image("fx/image.jpg");
+                imgCover.setImage(tmpImage);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        } else {
+            imgCover.setImage(null);
+        }
+    }
+
 
     /*
 
@@ -784,12 +818,7 @@ public class FXMLController{
         }
         lblPassivePerception.setText(Integer.toString(perception));
     }
-    */
-    @FXML
-    private void exitApplication() {
-        System.exit(0);
-    }
-    /*
+
     @FXML
     private void addMoney() {
         LOGGER.log(Level.INFO, "Add Money");
