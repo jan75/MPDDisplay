@@ -4,6 +4,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -22,12 +25,12 @@ public class MPDFXMain extends Application {
 			Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
 			//
 			FXMLLoader loader= new FXMLLoader();
-			StackPane root = loader.load(this.getClass().getResource("/fx/javaFXLayout.fxml"));
-			//Scene scene = new Scene(root, screenBounds.getWidth(), screenBounds.getHeight());
-			Scene scene = new Scene(root, 800, 800);
+			GridPane root = loader.load(this.getClass().getResource("/fx/javaFXLayout.fxml"));
+			Scene scene = new Scene(root, screenBounds.getWidth(), screenBounds.getHeight());
+			//Scene scene = new Scene(root, 800, 800);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
-			primaryStage.setResizable(false);
+			primaryStage.setResizable(true);
 			primaryStage.setTitle("MPDDisplay");
 			//primaryStage.setFullScreen(true);
 			//primaryStage.getIcons().add(new Image(MPDFXMain.class.getResourceAsStream("/fx/ApplicationIcon.png")));

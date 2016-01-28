@@ -1,19 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.StackPane?>
-
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<StackPane id="StackPane" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.FXMLController">
-	<children>
-		<VBox centerShape="true">
-			<ImageView fx:id="imgCover" visible="true"></ImageView>
-			<HBox>
-				<Button fx:id="btnTst" text="Exit" onAction="#exitApplication"></Button>
-				<Button fx:id="btnLoadImage" text="Image" onAction="#loadImage"></Button>
-			</HBox>
-		</VBox>
-	</children>
-</StackPane>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<?import javafx.scene.layout.VBox?>
+<GridPane fx:id="gridPaneRoot" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.FXMLController">
+   <columnConstraints>
+      <ColumnConstraints fillWidth="true" percentWidth="20.0" />
+      <ColumnConstraints fillWidth="true" percentWidth="60.0" />
+      <ColumnConstraints fillWidth="true" percentWidth="20.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints fillHeight="true" percentHeight="80.0" />
+      <RowConstraints fillHeight="true" percentHeight="20.0" />
+   </rowConstraints>
+   <children>
+	   <Button fx:id="btnPrevTrack" onAction="#prevTrack" text="Previous" GridPane.rowIndex="0" GridPane.columnIndex="0"></Button>
+	   <Button fx:id="btnNextTrack" onAction="#nextTrack" text="Next" GridPane.rowIndex="0" GridPane.columnIndex="2"></Button>
+	   <HBox alignment="CENTER">
+			<Button fx:id="btnTst" onAction="#exitApplication" text="Exit" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+	   </HBox>
+	   <VBox fx:id="vboxImg" GridPane.rowIndex="0" GridPane.columnIndex="1">
+		   <children>
+	   			<ImageView fx:id="imgCover" />
+		   </children>
+	   </VBox>
+   </children>
+</GridPane>

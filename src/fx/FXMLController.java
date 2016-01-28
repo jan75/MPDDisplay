@@ -1,28 +1,55 @@
 package fx;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
+import javafx.stage.Screen;
 import mpd.MPDOperations;
+import org.bff.javampd.MPD;
 
+import java.lang.management.OperatingSystemMXBean;
 import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Jan on 02.01.2016.
  */
-public class FXMLController{
+public class FXMLController implements Initializable {
     //private final static Logger LOGGER = Logger.getLogger("charSheetLogger");
+
     @FXML private ImageView imgCover;
+    @FXML private GridPane gridPaneRoot;
+    @FXML private RowConstraints row1;
+    @FXML private VBox vboxImg;
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        imgCover.setFitHeight(Screen.getPrimary().getVisualBounds().getHeight() * 0.7);
+        imgCover.setFitWidth(imgCover.getFitHeight());
+        //
+        loadImage();
+    }
 
     @FXML
     private void exitApplication() {
         System.exit(0);
     }
 
+    private void updateUI() {
+        loadImage();
+    }
+
     @FXML
     private void loadImage() {
         String pathToCover = MPDOperations.getCoverPath();
-        //pathToCover = '"' + pathToCover + '"';
+
         System.out.println(pathToCover);
 
         Image tmpImage;
@@ -31,6 +58,8 @@ public class FXMLController{
             try{
                 tmpImage = new Image(String.valueOf(new URL("file:" + pathToCover)));
                 //tmpImage = new Image("fx/image.jpg");
+                //imgCover.setFitHeight(300);
+                //imgCover.setFitWidth(300);
                 imgCover.setImage(tmpImage);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -40,6 +69,32 @@ public class FXMLController{
             imgCover.setImage(null);
         }
     }
+
+    @FXML
+    private void prevTrack() {
+        MPD mpd = MPDFXMain.mpd;
+
+        try {
+            mpd.getPlayer().playPrev();
+            updateUI();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void nextTrack() {
+        MPD mpd = MPDFXMain.mpd;
+
+        try {
+            mpd.getPlayer().playNext();
+            updateUI();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 
     /*
