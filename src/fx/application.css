@@ -1,0 +1,16 @@
+TextField {
+
+}
+
+Label{
+	-fx-alignment: center;
+}
+
+AnchorPane {
+    -fx-background-color: #CCCCCC;
+}
+
+#statsMods {
+    -fx-font-size: 22pt;
+    -fx-font-weight: bold;
+}

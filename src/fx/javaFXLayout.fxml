@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane id="StackPane" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.FXMLController">
+	<children>
+		<Button fx:id="btnTst" text="Exit" onAction="#exitApplication"></Button>
+	</children>
+</StackPane>

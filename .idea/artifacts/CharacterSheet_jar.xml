@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CharacterSheet:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/CharacterSheet_jar</output-path>
+    <root id="archive" name="CharacterSheet_jar.jar">
+      <element id="module-output" name="CharacterSheet" />
+    </root>
+  </artifact>
+</component>

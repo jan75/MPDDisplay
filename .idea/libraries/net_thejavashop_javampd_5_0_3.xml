@@ -1,0 +1,18 @@
+<component name="libraryTable">
+  <library name="net.thejavashop:javampd:5.0.3" type="repository">
+    <properties maven-id="net.thejavashop:javampd:5.0.3" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/javampd-5.0.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-api-1.7.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/logback-classic-1.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/logback-core-1.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/guice-3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javax.inject-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/aopalliance-1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/javampd-5.0.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
