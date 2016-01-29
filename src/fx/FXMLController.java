@@ -9,7 +9,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Screen;
 import mpd.MPDOperations;
+import mpd.MPDPlayerReadConfig;
 import org.bff.javampd.MPD;
+import org.bff.javampd.events.PlayerChangeEvent;
+import org.bff.javampd.events.PlayerChangeListener;
+import org.bff.javampd.exception.MPDResponseException;
+import org.bff.javampd.monitor.MPDStandAloneMonitor;
+import org.bff.javampd.monitor.PlayerStatus;
 
 import java.lang.management.OperatingSystemMXBean;
 import java.net.URL;
@@ -31,10 +37,21 @@ public class FXMLController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        MPDPlayerReadConfig.readConfig();
+        //
         imgCover.setFitHeight(Screen.getPrimary().getVisualBounds().getHeight() * 0.7);
         imgCover.setFitWidth(imgCover.getFitHeight());
         //
         loadImage();
+        //
+        /*
+        MPDFXMain.mpd.getPlayer().addPlayerChangeListener(event -> {
+            if(event.equals(PlayerChangeEvent.Event.PLAYER_NEXT)) {
+                loadImage();
+            }
+        });
+        */
+
     }
 
     @FXML
@@ -50,7 +67,7 @@ public class FXMLController implements Initializable {
     private void loadImage() {
         String pathToCover = MPDOperations.getCoverPath();
 
-        System.out.println(pathToCover);
+        //System.out.println(pathToCover);
 
         Image tmpImage;
         //

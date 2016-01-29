@@ -55,8 +55,8 @@ public class MPDOperations {
     public static String getCoverPath() {
         MPD mpd = MPDFXMain.mpd;
 
-        //String mpdDatabase = "/mnt/media/Musik/";
-        String mpdDatabase = "Z:/Musik/";
+        String mpdDatabase = MPDFXMain.mpdLibraryDir;
+        //String mpdDatabase = "Z:/Musik/";
         String mpdCoverPath = null;
         try {
             String filePath = mpdDatabase + mpd.getPlayer().getCurrentSong().getFile();
@@ -68,7 +68,6 @@ public class MPDOperations {
 
             for (int i = 0; i < filePathExtension.length; i++) {
                 String tmpCoverPath;
-
                 String osName = System.getProperty("os.name").toLowerCase();
                 Matcher findOS = Pattern.compile("Windows").matcher(osName);
                 if(osName.contains("windows")) {
@@ -78,7 +77,7 @@ public class MPDOperations {
                 } else {
                     tmpCoverPath = coverPathParent + "/" + filePathExtension[i];
                 }
-
+                //System.out.println(tmpCoverPath);
                 if (new File(tmpCoverPath).exists()) {
                     mpdCoverPath = tmpCoverPath;
                     break;

@@ -4,21 +4,21 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import mpd.MPDOperations;
 import org.bff.javampd.MPD;
+import mpd.MPDPlayerReadConfig;
 
 public class MPDFXMain extends Application {
 	//private final static Logger LOGGER = Logger.getLogger("charSheetLogger");
 	public static MPD mpd = MPDOperations.connectMPD();
+	public static String mpdLibraryDir = null;
 
 	@Override
 	public void start(Stage primaryStage) {
+
 
 		//
 		try{
