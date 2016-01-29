@@ -9,6 +9,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.Label?>
 <GridPane fx:id="gridPaneRoot" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fx.FXMLController">
    <columnConstraints>
       <ColumnConstraints fillWidth="true" percentWidth="20.0" />
@@ -16,19 +19,35 @@
       <ColumnConstraints fillWidth="true" percentWidth="20.0" />
    </columnConstraints>
    <rowConstraints>
+      <RowConstraints fillHeight="true" percentHeight="3.0" />
       <RowConstraints fillHeight="true" percentHeight="80.0" />
-      <RowConstraints fillHeight="true" percentHeight="20.0" />
+      <RowConstraints fillHeight="true" percentHeight="2" />
+      <RowConstraints fillHeight="true" percentHeight="15.0" />
    </rowConstraints>
    <children>
-	   <Button fx:id="btnPrevTrack" onAction="#prevTrack" text="Previous" GridPane.rowIndex="0" GridPane.columnIndex="0"></Button>
-	   <Button fx:id="btnNextTrack" onAction="#nextTrack" text="Next" GridPane.rowIndex="0" GridPane.columnIndex="2"></Button>
-	   <HBox alignment="CENTER">
-			<Button fx:id="btnTst" onAction="#exitApplication" text="Exit" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-	   </HBox>
-	   <VBox fx:id="vboxImg" GridPane.rowIndex="0" GridPane.columnIndex="1">
-		   <children>
-	   			<ImageView fx:id="imgCover" />
-		   </children>
-	   </VBox>
+      <StackPane id="paneLeft" fx:id="panePrevTrack" GridPane.rowIndex="1" GridPane.columnIndex="0" onMouseClicked="#prevTrack">
+         <children>
+            <Label id="vertText" text="PREV"></Label>
+         </children>
+      </StackPane>
+      <StackPane id="paneCenter" fx:id="paneCenter" GridPane.valignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.columnIndex="1" >
+         <children>
+            <ImageView id="imgView" fx:id="imgCover"/>
+         </children>
+      </StackPane>
+      <StackPane id="paneRight" fx:id="paneNextTrack" GridPane.rowIndex="1" GridPane.columnIndex="2" onMouseClicked="#nextTrack">
+         <children>
+            <Label id="vertText" text="NEXT" ></Label>
+         </children>
+      </StackPane>
+      <StackPane id="paneBottom" fx:id="paneInfo" GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="3">
+         <children>
+            <VBox alignment="CENTER">
+               <Label fx:id="infoTrack" id="infoTextFirstLine" text="placeholder - first line"></Label>
+               <Label fx:id="infoArtistAlbum" id="infoTextSecondLine" text="placeholder long text here - second line"></Label>
+            </VBox>
+         </children>
+      </StackPane>
+      <!--<Button fx:id="btnTst" onAction="#exitApplication" text="Exit" GridPane.rowIndex="1" GridPane.columnIndex="2" alignment="BOTTOM_RIGHT"/>-->
    </children>
 </GridPane>

@@ -20,6 +20,7 @@ public class MPDPlayerReadConfig {
             prop.load(input);
             //
             MPDFXMain.mpdLibraryDir = prop.getProperty("mpdLibraryPath");
+            MPDFXMain.mpdHost = prop.getProperty("mpdHost");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

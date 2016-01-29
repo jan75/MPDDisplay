@@ -15,6 +15,7 @@ public class MPDFXMain extends Application {
 	//private final static Logger LOGGER = Logger.getLogger("charSheetLogger");
 	public static MPD mpd = MPDOperations.connectMPD();
 	public static String mpdLibraryDir = null;
+	public static String mpdHost = null;
 
 	@Override
 	public void start(Stage primaryStage) {

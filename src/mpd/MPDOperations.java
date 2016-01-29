@@ -19,9 +19,12 @@ public class MPDOperations {
     public static MPD connectMPD() {
         MPD mpd = null;
         try{
+            //String mpdHost = '"' + MPDFXMain.mpdHost + '"';
+
             mpd = new MPD.Builder()
                     .server("192.168.0.18")
                     .build();
+            //
             //
             //mpd.getPlaylist().clearPlaylist();
             //
