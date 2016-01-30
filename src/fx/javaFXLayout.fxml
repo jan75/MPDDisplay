@@ -32,7 +32,7 @@
       </StackPane>
       <StackPane id="paneCenter" fx:id="paneCenter" GridPane.valignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.columnIndex="1" >
          <children>
-            <ImageView id="imgView" fx:id="imgCover"/>
+            <ImageView id="imgView" fx:id="imgCover" onMouseClicked="#togglePlayPause"/>
          </children>
       </StackPane>
       <StackPane id="paneRight" fx:id="paneNextTrack" GridPane.rowIndex="1" GridPane.columnIndex="2" onMouseClicked="#nextTrack">

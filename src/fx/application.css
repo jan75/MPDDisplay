@@ -18,12 +18,13 @@
 
 #imgView{
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 20, 0.3, 0, 0);
+    -fx-cursor: hand;
 }
 
 #vertText{
-    -fx-font-size: 60pt;
+    -fx-font-size: 80pt;
     -fx-font-weight: bolder;
-    -fx-text-fill: rgba(100,100,100,0.2);
+    -fx-text-fill: rgba(100,100,100,0.15);
     -fx-alignment: center;
 }
 #vertText:hover{

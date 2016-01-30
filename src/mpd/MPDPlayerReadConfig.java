@@ -21,6 +21,8 @@ public class MPDPlayerReadConfig {
             //
             MPDFXMain.mpdLibraryDir = prop.getProperty("mpdLibraryPath");
             MPDFXMain.mpdHost = prop.getProperty("mpdHost");
+            MPDFXMain.mpdPort = Integer.parseInt(prop.getProperty("mpdPort"));
+            //
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

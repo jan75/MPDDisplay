@@ -21,25 +21,20 @@ public class MPDOperations {
         try{
             //String mpdHost = '"' + MPDFXMain.mpdHost + '"';
 
-            mpd = new MPD.Builder()
-                    .server("192.168.0.18")
-                    .build();
-            //
-            //
-            //mpd.getPlaylist().clearPlaylist();
-            //
-            //System.out.println(mpd.getDatabase().findAlbum("21").size());
-            //System.out.println(mpd.getPlayer().getCurrentSong().getArtistName().toString());
-
-
-
-            //System.out.println(PlayerChangeEvent.Event.PLAYER_NEXT.toString());
-
-            //System.out.println(mpd.getMonitor().addPlayerChangeListener(StandAloneMonitor.PlayerResponse.PAUSE.getPrefix());
-
+            if(MPDFXMain.mpdHost != "" && MPDFXMain.mpdPort != 0) {
+                mpd = new MPD.Builder()
+                        .server(MPDFXMain.mpdHost)
+                        .port(MPDFXMain.mpdPort)
+                        .build();
+            } else {
+                mpd = new MPD.Builder()
+                        .server("192.168.0.18")
+                        .port(6600)
+                        .build();
+            }
 
         } catch (Exception e) {
-            System.out.println("No connection - is MPD running?");
+            System.out.println("No connection - is MPD running? Check your configuration in config.properties");
             e.printStackTrace();
         }
 
