@@ -1,12 +1,16 @@
 package mpd;
 
 import fx.MPDFXMain;
+import org.bff.javampd.Database;
 import org.bff.javampd.MPD;
-import org.bff.javampd.StandAloneMonitor;
-import org.bff.javampd.events.PlayerBasicChangeEvent;
-import org.bff.javampd.events.PlayerBasicChangeListener;
+import org.bff.javampd.objects.MPDAlbum;
+import org.bff.javampd.objects.MPDSong;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,7 +32,7 @@ public class MPDOperations {
                         .build();
             } else {
                 mpd = new MPD.Builder()
-                        .server("192.168.0.18")
+                        .server("localhost")
                         .port(6600)
                         .build();
             }
@@ -45,53 +49,69 @@ public class MPDOperations {
         }
     }
 
-
     public static String getString() {
         return null;
     }
 
-    public static String getCoverPath() {
+    public static HashMap<String, String> buildCoverDatabase() {
+        HashMap<String, String> mpdAlbumStringHashMap = new HashMap<String, String>();
+        mpdAlbumStringHashMap.clear();
         MPD mpd = MPDFXMain.mpd;
 
-        String mpdDatabase = MPDFXMain.mpdLibraryDir;
-        //String mpdDatabase = "Z:/Musik/";
-        String mpdCoverPath = null;
-        try {
-            String filePath = mpdDatabase + mpd.getPlayer().getCurrentSong().getFile();
-            File tmpFile = new File(filePath);
-            String coverPathParent = tmpFile.getParent().toString();
-            File tmpFileTester;
-            //
-            String[] filePathExtension = {mpd.getPlayer().getCurrentSong().getAlbumName().toString() + ".jpg", mpd.getPlayer().getCurrentSong().getAlbumName().toString() + ".png", "Cover.jpg", "cover.jpg", "Folder.jpg", "folder.jpg", "Cover.png", "cover.png", "Folder.png", "folder.png", "Front.jpg", "front.jpg", "Front.png", "front.png"};
+        String mpdFileFolder = MPDFXMain.mpdLibraryDir;
 
-            for (int i = 0; i < filePathExtension.length; i++) {
-                String tmpCoverPath;
-                String osName = System.getProperty("os.name").toLowerCase();
-                Matcher findOS = Pattern.compile("Windows").matcher(osName);
-                if(osName.contains("windows")) {
-                    tmpCoverPath = coverPathParent + "\\" + filePathExtension[i];
-                } else if (osName.contains("linux")){
-                    tmpCoverPath = coverPathParent + "/" + filePathExtension[i];
+        Database mpdDatabase = mpd.getDatabase();
+        TreeSet<MPDAlbum> mpdAlbumTreeSet;
+        ArrayList<MPDSong> mpdSongArrayList = new ArrayList<MPDSong>();
+
+        String mpdCoverPath = null;
+
+        try {
+            Collection<MPDAlbum> mpdAlbumCollection = mpdDatabase.listAllAlbums();
+            mpdAlbumTreeSet = new TreeSet<MPDAlbum>(mpdAlbumCollection);
+
+            for(MPDAlbum mpdAlbum: mpdAlbumTreeSet) {
+                mpdSongArrayList.clear();
+                //System.out.println(mpdAlbum.getName() + "\n");
+
+                Collection<MPDSong> mpdSongCollection = mpdDatabase.findAlbum(mpdAlbum);
+                mpdSongArrayList.addAll(mpdSongCollection);
+                String mpdSongFolder = mpdSongArrayList.get(0).getFile();
+
+                String filePath = mpdFileFolder + mpdSongFolder;
+                File tmpFile = new File(filePath);
+                String coverPathParent = tmpFile.getParent().toString();
+
+                String[] filePathExtension = {mpdAlbum.getName() + ".jpg", mpdAlbum.getName() + ".png", "Cover.jpg", "cover.jpg", "Folder.jpg", "folder.jpg", "Cover.png", "cover.png", "Folder.png", "folder.png", "Front.jpg", "front.jpg", "Front.png", "front.png"};
+
+                for (int i = 0; i < filePathExtension.length; i++) {
+                    String tmpCoverPath;
+                    String osName = System.getProperty("os.name").toLowerCase();
+                    Matcher findOS = Pattern.compile("Windows").matcher(osName);
+                    if(osName.contains("windows")) {
+                        tmpCoverPath = coverPathParent + "\\" + filePathExtension[i];
+                    } else if (osName.contains("linux")){
+                        tmpCoverPath = coverPathParent + "/" + filePathExtension[i];
+                    } else {
+                        tmpCoverPath = coverPathParent + "/" + filePathExtension[i];
+                    }
+
+                    if (new File(tmpCoverPath).exists()) {
+                        mpdCoverPath = tmpCoverPath;
+                        break;
+                    }
+                }
+
+                if (mpdCoverPath != null) {
+                    mpdAlbumStringHashMap.put(mpdAlbum.getName(), mpdCoverPath);
                 } else {
-                    tmpCoverPath = coverPathParent + "/" + filePathExtension[i];
+                    mpdAlbumStringHashMap.put(mpdAlbum.getName(), "null");
                 }
-                //System.out.println(tmpCoverPath);
-                if (new File(tmpCoverPath).exists()) {
-                    mpdCoverPath = tmpCoverPath;
-                    break;
-                }
+
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        if (mpdCoverPath != null) {
-            return mpdCoverPath;
-        } else {
-            System.out.println("no cover found!");
-            return null;
-        }
+        return mpdAlbumStringHashMap;
     }
-
-
 }
