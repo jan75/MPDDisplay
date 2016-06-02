@@ -10,7 +10,10 @@ import org.bff.javampd.MPD;
 public class MPDFXMain extends Application {
 	public static MPD mpd = null;
 	public static String mpdLibraryDir = null;
+	public static String mpdGeneratedFiles = null;
 	public static String mpdHost = null;
+	public static int mpdCoversStartup = 0;
+	public static int mpdCoversLoad = 0;
 	public static int mpdPort = 0;
 
 	@Override

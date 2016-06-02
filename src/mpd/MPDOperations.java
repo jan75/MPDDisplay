@@ -23,8 +23,6 @@ public class MPDOperations {
     public static MPD connectMPD() {
         MPD mpd = null;
         try{
-            //String mpdHost = '"' + MPDFXMain.mpdHost + '"';
-
             if(MPDFXMain.mpdHost != "" && MPDFXMain.mpdPort != 0) {
                 mpd = new MPD.Builder()
                         .server(MPDFXMain.mpdHost)
@@ -49,10 +47,6 @@ public class MPDOperations {
         }
     }
 
-    public static String getString() {
-        return null;
-    }
-
     public static HashMap<String, String> buildCoverDatabase() {
         HashMap<String, String> mpdAlbumStringHashMap = new HashMap<String, String>();
         mpdAlbumStringHashMap.clear();
@@ -72,7 +66,6 @@ public class MPDOperations {
 
             for(MPDAlbum mpdAlbum: mpdAlbumTreeSet) {
                 mpdSongArrayList.clear();
-                //System.out.println(mpdAlbum.getName() + "\n");
 
                 Collection<MPDSong> mpdSongCollection = mpdDatabase.findAlbum(mpdAlbum);
                 mpdSongArrayList.addAll(mpdSongCollection);
@@ -80,7 +73,7 @@ public class MPDOperations {
 
                 String filePath = mpdFileFolder + mpdSongFolder;
                 File tmpFile = new File(filePath);
-                String coverPathParent = tmpFile.getParent().toString();
+                String coverPathParent = tmpFile.getParent();
 
                 String[] filePathExtension = {mpdAlbum.getName() + ".jpg", mpdAlbum.getName() + ".png", "Cover.jpg", "cover.jpg", "Folder.jpg", "folder.jpg", "Cover.png", "cover.png", "Folder.png", "folder.png", "Front.jpg", "front.jpg", "Front.png", "front.png"};
 
@@ -112,6 +105,7 @@ public class MPDOperations {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return mpdAlbumStringHashMap;
     }
 }

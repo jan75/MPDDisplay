@@ -1,4 +1,4 @@
-package mpd;
+package file;
 
 import fx.MPDFXMain;
 
@@ -8,7 +8,7 @@ import java.util.Properties;
 /**
  * Created by jan on 1/29/16.
  */
-public class MPDPlayerReadConfig {
+public class ReadConfig {
     public static void readConfig() {
         Properties prop = new Properties();
         InputStream input = null;
@@ -20,8 +20,12 @@ public class MPDPlayerReadConfig {
             prop.load(input);
             //
             MPDFXMain.mpdLibraryDir = prop.getProperty("mpdLibraryPath");
+            MPDFXMain.mpdGeneratedFiles = prop.getProperty("mpdGeneratedFiles");
             MPDFXMain.mpdHost = prop.getProperty("mpdHost");
             MPDFXMain.mpdPort = Integer.parseInt(prop.getProperty("mpdPort"));
+            MPDFXMain.mpdCoversStartup = Integer.parseInt(prop.getProperty("mpdCoversStartup"));
+            MPDFXMain.mpdCoversLoad = Integer.parseInt(prop.getProperty("mpdCoversLoad"));
+
             //
         } catch (Exception e) {
             e.printStackTrace();
